@@ -7,6 +7,7 @@ import filmsPageRoutes from "./routes/films2.js"
 import actorsRoutes from "./routes/actors.js";
 import customersRoutes from "./routes/customers.js";
 import connectMySql from './db/connectMySql.js';
+import rentalsRoutes from './routes/rentals.js';
 import cors from 'cors';
 
 
@@ -14,6 +15,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+app.use(express.json());
 
 /*
 app.set("view engine", "ejs");
@@ -26,6 +28,7 @@ app.use("/api/films", filmsRoutes);
 app.use("/api/actors", actorsRoutes); 
 app.use("/api/films-page", filmsPageRoutes);
 app.use("/api/customers", customersRoutes);
+app.use('/api/rentals', rentalsRoutes);
 
 // Start server
 const PORT = process.env.PORT || 5000;

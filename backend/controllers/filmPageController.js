@@ -1,4 +1,4 @@
-import { getFilmsPaginated, searchFilms } from "../models/chartsQueries.js";
+import { getFilmsPaginated, searchFilms, getMovieDetailsById } from "../models/chartsQueries.js";
 
 export const getFilms = (req, res) => {
   const page = parseInt(req.query.page) || 1;
@@ -25,6 +25,18 @@ export const searchFilmByQuery = (req, res) => {
   searchFilms(searchQuery, limit, offset, (err, result) => {
     if (err) {
       return res.status(500).json({ error: "Failed to search films" });
+    }
+    res.json(result);
+  });
+};
+
+export const getFilmDetails = (req, res) => {
+  const movieId = req.params.id;
+
+  getMovieDetailsById(movieId, (err, result) =>{
+    if(err) {
+      return res.status(500).json({error: "Failed to fetch film details"});
+
     }
     res.json(result);
   });
